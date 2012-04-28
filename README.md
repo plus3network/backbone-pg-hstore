@@ -28,12 +28,12 @@ Backbone.createTable('users', function (err, info) {
     me.save(null, {
           
         // Success calback
-        success: function (model) {
+        success: function (model, options) {
             // Do something here!
         }
         
         // Error callback
-        , error: function (err) {
+        , error: function (model, err, options) {
             // Oops!
         }
     });
@@ -60,12 +60,12 @@ Backbone.createTable('users', function (err, info) {
         , hasAll: [ 'firstName', 'lastName' ]
         
         // Success callback
-        , success: function (collection) {
+        , success: function (collection, options) {
             // Do something here!
         }
 
         // Error callback
-        , error: function (err) {
+        , error: function (collection, err, options) {
             // Oops!
         }
     })
