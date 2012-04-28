@@ -1,0 +1,36 @@
+{
+ "name": "backbone-pg-hstore",
+  "version": "0.0.1",
+  "author": {
+    "name": "Chris Cowan",
+    "email": "chris@chriscowan.us",
+    "url": "http://chriscowan.us"
+  },
+  "dependencies": {
+    "backbone": ">=0.9.1",
+    "pg": ">=0.6.17",
+    "node-uuid": ">=1.3.3"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "main": "./backbone-pg-hstore",
+  "_id": "backbone-pg-hstore@0.0.1",
+  "devDependencies": {
+    "vows": "*"
+  },
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "_engineSupported": true,
+  "_npmVersion": "1.1.18",
+  "_nodeVersion": "v0.6.15",
+  "_defaultsLoaded": true,
+  "dist": {
+    "shasum": "b695b516f293f8e195c78674bdb1e69805644eda"
+  },
+  "_from": "backbone-pg-hstore"
+}
