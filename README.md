@@ -73,6 +73,6 @@ Backbone.createTable('users', function (err, info) {
 });
 ```
 
-### Inspired By
+### Inspired By:
 
 http://blog.creapptives.com/post/14062057061/the-key-value-store-everyone-ignored-postgresql
