@@ -1,7 +1,7 @@
 backbone-pg-hstore
 ==================
 
-A Backbone sync adapter that used Postgres Hstore for the backend. This library is intended to be used with Node.js.
+A Backbone sync adapter that used Postgres Hstore for the backend. This library is intended to be used with Node.js. This is still in the beginning stages of development.
 
 ### Example Usage:
 
