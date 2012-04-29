@@ -19,7 +19,8 @@
   "main": "./backbone-pg-hstore",
   "_id": "backbone-pg-hstore@0.0.1",
   "devDependencies": {
-    "vows": "*"
+    "jasmine-node": "*"
+    ,"sinon": "*"
   },
   "optionalDependencies": {},
   "engines": {
