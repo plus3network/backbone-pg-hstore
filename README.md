@@ -51,7 +51,7 @@ Backbone.createTable('users', function (err, info) {
         fields: [ 'firstName', 'lastName' ]
         
         // rows have the match following key/values, useful for filtering
-        , with: { lastName: 'Cowan', isActive: true }
+        , filter: { lastName: 'Cowan', isActive: true }
         
         // rows needs to have any of these fields
         , hasAny: [ 'email' ]

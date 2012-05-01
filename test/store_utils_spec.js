@@ -48,6 +48,10 @@ describe("Store Utility Functions", function () {
         expect(store.toObject('"sample"=>"this has \\"quotes\\""').sample).toEqual('this has "quotes"');
     });
 
+    it('should convert a hstore object with a comma', function () {
+        expect(store.toObject('"sample"=>"This bar, no that bar"').sample).toEqual('This bar, no that bar');
+    });
+
     it('should convert a hstore object with a number to an object', function () {
         expect(store.toObject('"sample"=>"100.01"').sample).toEqual(100.01);
     });
