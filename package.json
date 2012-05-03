@@ -16,7 +16,7 @@
       "type": "MIT"
     }
   ],
-  "main": "./backbone-pg-hstore",
+  "main": "./lib/backbone-pg-hstore",
   "_id": "backbone-pg-hstore@0.0.1",
   "devDependencies": {
     "jasmine-node": "*"
@@ -30,8 +30,5 @@
   "_npmVersion": "1.1.18",
   "_nodeVersion": "v0.6.15",
   "_defaultsLoaded": true,
-  "dist": {
-    "shasum": "b695b516f293f8e195c78674bdb1e69805644eda"
-  },
   "_from": "backbone-pg-hstore"
 }
