@@ -33,7 +33,7 @@ describe "Store::Read", ->
     collection.fetch
       fields: [ "firstOne" ]
       success: (collection, options) ->
-        expect(queryStub.args[0][0]).toEqual "SELECT documents.id,documents.doc->'firstOne' as firstOne FROM documents "
+        expect(queryStub.args[0][0]).toEqual "SELECT documents.id,documents.doc->'firstOne' as \"firstOne\" FROM documents "
         done()
 
     connectStub.callArgWith 1, null, client
@@ -41,9 +41,9 @@ describe "Store::Read", ->
 
   it "should allow you to specifiy rawFields", (done) ->
     collection.fetch
-      rawFields: [ "count(documents.doc->'isActive') as total" ]
+      rawFields: ["count(documents.doc->'isActive') as \"total\""]
       success: (collection, options) ->
-        expect(queryStub.args[0][0]).toEqual "SELECT count(documents.doc->'isActive') as total FROM documents "
+        expect(queryStub.args[0][0]).toEqual "SELECT count(documents.doc->'isActive') as \"total\" FROM documents "
         done()
 
     connectStub.callArgWith 1, null, client
@@ -87,7 +87,7 @@ describe "Store::Read", ->
 
   it "should allow you to select rows with a custom clause/value set", (done) ->
     collection.fetch
-      clauses: [ [ "documents.doc->'firstOne' = %s", 1 ] ]
+      clauses: [ [ "documents.doc->'firstOne' = $1", 1 ] ]
       success: (collection, options) ->
         expect(queryStub.args[0][0]).toEqual "SELECT documents.* FROM documents WHERE documents.doc->'firstOne' = $1"
         expect(queryStub.args[0][1]).toEqual [ 1 ]
@@ -170,16 +170,16 @@ describe "Store::Read", ->
         firstOne: "One"
       hasAll: ["firstOne","secondOne"]
       hasAny: ["isActive"]
-      clauses: [ [ "documents.doc->'firstOne' = %s", 1 ] ]
-      rawFields: [ "count(documents.doc->'isActive') as total" ]
+      clauses: [["documents.doc->'firstOne' = $1", 1 ]]
+      rawFields: ["count(documents.doc->'isActive') as \"total\""]
       offset: 0
       limit: 25
-      orderBy: [ "createdOn", [ "firstOne", "DESC" ] ]
-      rawOrderBy: [ "createdBy DESC", "createdOn DESC" ]
-      groupBy: [ "count", "id" ]
-      having: [ "count > $1 AND count < $2", [ 10, 20 ] ]
+      orderBy: ["createdOn", ["firstOne", "DESC"]]
+      rawOrderBy: ["createdBy DESC", "createdOn DESC"]
+      groupBy: ["count", "id" ]
+      having: ["count > $1 AND count < $2", [10, 20]]
       success: (collection, options) ->
-        expect(queryStub.args[0][0]).toEqual "SELECT documents.id,documents.doc->'firstOne' as firstOne,documents.doc->'secondOne' as secondOne,count(documents.doc->'isActive') as total FROM documents WHERE documents.doc @> $1 AND documents.doc ?| $2 AND documents.doc ?& $3 AND documents.doc->'firstOne' = $4 GROUP BY count, id HAVING count > $5 AND count < $6 ORDER BY $7, $8, $9, $10 LIMIT $11 OFFSET $12"
+        expect(queryStub.args[0][0]).toEqual "SELECT documents.id,documents.doc->'firstOne' as \"firstOne\",documents.doc->'secondOne' as \"secondOne\",count(documents.doc->'isActive') as \"total\" FROM documents WHERE documents.doc @> $1 AND documents.doc ?| $2 AND documents.doc ?& $3 AND documents.doc->'firstOne' = $4 GROUP BY count, id HAVING count > $5 AND count < $6 ORDER BY $7, $8, $9, $10 LIMIT $11 OFFSET $12"
         expect(queryStub.args[0][1]).toEqual [ '"firstOne"=>"One"', '{"isActive"}', '{"firstOne","secondOne"}', 1, 10, 20, "documents.doc->'createdOn' ASC", "documents.doc->'firstOne' DESC", 'createdBy DESC', 'createdOn DESC', 25, 0 ]
         done()
 

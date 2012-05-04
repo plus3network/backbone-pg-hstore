@@ -36,14 +36,21 @@ class Store
     
     if options.clauses
       for clause in options.clauses
-        values.push clause[1]
-        clauses.push util.format(clause[0], util.format("$%d", values.length))
-    
+        if util.isArray clause[1]
+          clauseString = clause[0].replace(/\$\d+/g, "$%d")
+          for val in clause[1]
+            values.push val
+            clauseString = util.format(clauseString, values.length)
+          clauses.push clauseString
+        else
+          values.push clause[1]
+          clauses.push util.format(clause[0].replace(/\$\d+/g, "$%d"), values.length)
+
     # transform the fields do the use table.doc->'name'
     if util.isArray(options.fields)
       fields.push util.format("%s.id", table)
       for field in options.fields
-        fields.push util.format("%s.doc->'%s' as %s", table, field, field)
+        fields.push util.format("%s.doc->'%s' as \"%s\"", table, field, field) unless field is "id"
 
     # users need to be able to specify raw fields
     if options.rawFields
@@ -115,8 +122,9 @@ class Store
             # if there are fields specified then we need to map those 
             # to the object.
             if options.fields and util.isArray(options.fields)
-              for field in options.fields
-                object[field] = row[field.toLowerCase()]
+              object = row
+              # for field in options.fields
+                # object[field] = row[field.toLowerCase()]
         
             # if the hstore object is presetn parse it
             else if row.doc
